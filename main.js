@@ -18,7 +18,7 @@ define(function (require, exports, module) {
 		menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU),
 		ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
 		
-//	ExtensionUtils.loadStyleSheet(module, "main.css");
+	ExtensionUtils.loadStyleSheet(module, "main.css");
 
 	// fix width of current working file selection when resizing the working files panel
 	var sidebar_selection = $('.sidebar-selection');
@@ -40,6 +40,9 @@ define(function (require, exports, module) {
 
 		if (prefs.get('resizeWorkingFiles')) {
 			Resizer.makeResizable($('#working-set-list-container'), "vert", "bottom", 75);
+			$('#working-set-list-container').on('panelResizeUpdate', function(element, newSize){
+//				$('.scroller-shadow bottom')[0].style.setProperty('top', newSize);
+			});
 		}
 	});
 });
