@@ -40,8 +40,9 @@ define(function (require, exports, module) {
 
 		if (prefs.get('resizeWorkingFiles')) {
 			Resizer.makeResizable($('#working-set-list-container'), "vert", "bottom", 75);
-			$('#working-set-list-container').on('panelResizeUpdate', function(element, newSize){
-//				$('.scroller-shadow bottom')[0].style.setProperty('top', newSize);
+			$('#working-set-list-container').on('panelResizeUpdate', function (element, newSize) {
+				console.log(newSize);
+				$('.open-files-container')[0].style.setProperty('height', newSize - 38 + "px");
 			});
 		}
 	});

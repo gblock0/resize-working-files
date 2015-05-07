@@ -1,3 +1,7 @@
 #working-set-list-container{
 	overflow: hidden;
 }
+
+.open-files-container{
+	max-height: none;
+}
