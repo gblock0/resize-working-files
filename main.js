@@ -14,7 +14,7 @@ define(function (require, exports, module) {
 	var CommandManager = brackets.getModule("command/CommandManager"),
 		Menus = brackets.getModule("command/Menus"),
 		PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
-		prefs = PreferencesManager.getExtensionPrefs("resizeBottomWorkingFiles"),
+		prefs = PreferencesManager.getExtensionPrefs("resizeWorkingFiles"),
 		menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU),
 		ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
 		
