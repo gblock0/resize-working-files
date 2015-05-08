@@ -5,3 +5,6 @@
 .open-files-container{
 	max-height: none;
 }
+.sidebar-selection{
+	width: 100% !important;
+}
