@@ -41,7 +41,18 @@ define(function (require, exports, module) {
 		if (prefs.get('resizeWorkingFiles')) {
 			Resizer.makeResizable($('#working-set-list-container'), "vert", "bottom", 75);
 			$('#working-set-list-container').on('panelResizeUpdate', function (element, newSize) {
-				$('.open-files-container')[0].style.setProperty('height', newSize - 38 + "px");
+				var sizeForOpenFilesContainer = newSize;
+				var $secondPane = $("#second-pane");
+				var numPanes = 1;
+				var $openFilesContainer = $('.open-files-container');
+				if ($secondPane.length !== 0) {
+					sizeForOpenFilesContainer = newSize / 2;
+					numPanes = 2;
+				}
+				for (var i = 0; i < numPanes; i++){
+					$openFilesContainer[i].style.setProperty('height', sizeForOpenFilesContainer - 38 + "px");
+				}
+
 			});
 		}
 	});
