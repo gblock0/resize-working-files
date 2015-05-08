@@ -45,11 +45,12 @@ define(function (require, exports, module) {
 				var $secondPane = $("#second-pane");
 				var numPanes = 1;
 				var $openFilesContainer = $('.open-files-container');
+				var i;
 				if ($secondPane.length !== 0) {
 					sizeForOpenFilesContainer = newSize / 2;
 					numPanes = 2;
 				}
-				for (var i = 0; i < numPanes; i++){
+				for (i = 0; i < numPanes; i++) {
 					$openFilesContainer[i].style.setProperty('height', sizeForOpenFilesContainer - 38 + "px");
 				}
 
