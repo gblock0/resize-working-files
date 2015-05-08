@@ -1,6 +1,6 @@
 {
 	"name": "gblock0.resizable-working-files",
-	"title": "Resizable Working Files",
+	"title": "Resize Working Files",
 	"description": "Brackets extensions to allow the user to resize the Working Files pane.",
 	"homepage": "https://github.com/gblock0/resize-working-files",
 	"version": "1.2.0",
