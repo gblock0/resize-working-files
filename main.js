@@ -16,8 +16,9 @@ define(function (require, exports, module) {
 		PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
 		prefs = PreferencesManager.getExtensionPrefs("resizeWorkingFiles"),
 		menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU),
+		MainViewManager = brackets.getModule("view/MainViewManager"),
 		ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
-		
+
 	ExtensionUtils.loadStyleSheet(module, "main.css");
 
 	// fix width of current working file selection when resizing the working files panel
@@ -37,23 +38,24 @@ define(function (require, exports, module) {
 		CommandManager.get('block.resize-working-files').setChecked(prefs.get('resizeWorkingFiles'));
 
 		Resizer.removeSizable($('#working-set-list-container'));
+		var numPanes = MainViewManager.getPaneCount(),
+			sizeForOpenFilesContainer = 0,
+			$openFilesContainer = $('.open-files-container'),
+			i;
 
 		if (prefs.get('resizeWorkingFiles')) {
 			Resizer.makeResizable($('#working-set-list-container'), "vert", "bottom", 75);
+			MainViewManager.on("paneCreate", function (e, paneId) {
+				numPanes = MainViewManager.getPaneCount();
+			});
+			MainViewManager.on("paneDestroy", function (e, paneId) {
+				numPanes = MainViewManager.getPaneCount();
+			});
 			$('#working-set-list-container').on('panelResizeUpdate', function (element, newSize) {
-				var sizeForOpenFilesContainer = newSize;
-				var $secondPane = $("#second-pane");
-				var numPanes = 1;
-				var $openFilesContainer = $('.open-files-container');
-				var i;
-				if ($secondPane.length !== 0) {
-					sizeForOpenFilesContainer = newSize / 2;
-					numPanes = 2;
-				}
+				sizeForOpenFilesContainer = newSize / numPanes;
 				for (i = 0; i < numPanes; i++) {
 					$openFilesContainer[i].style.setProperty('height', sizeForOpenFilesContainer - 38 + "px");
 				}
-
 			});
 		}
 	});
