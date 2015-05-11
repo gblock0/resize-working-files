@@ -6,6 +6,31 @@
 *
 * Greg Block (gblock0@gmail.com)
 */
+
+/**
+*
+* Private function to resize $('.open-files-container')
+*
+**/
+function _resizeOpenFilesContainer(paneCount, containerSize) {
+	'use strict';
+
+	var sizeForOpenFilesContainer = containerSize / paneCount,
+		$openFilesContainer = $('.open-files-container'),
+		newHeight = 0,
+		i;
+
+	for (i = 0; i < paneCount; i++) {
+		newHeight = sizeForOpenFilesContainer - 38;
+		$openFilesContainer[i].style.setProperty('height', newHeight + "px");
+	}
+}
+
+/**
+*
+* Define the extension
+*
+**/
 define(function (require, exports, module) {
 	"use strict";
 
@@ -38,25 +63,30 @@ define(function (require, exports, module) {
 		CommandManager.get('block.resize-working-files').setChecked(prefs.get('resizeWorkingFiles'));
 
 		Resizer.removeSizable($('#working-set-list-container'));
+
 		var numPanes = MainViewManager.getPaneCount(),
 			sizeForOpenFilesContainer = 0,
-			$openFilesContainer = $('.open-files-container'),
-			i;
+			workingFilesPaneSize = 0;
 
 		if (prefs.get('resizeWorkingFiles')) {
 			Resizer.makeResizable($('#working-set-list-container'), "vert", "bottom", 75);
+
 			MainViewManager.on("paneCreate", function (e, paneId) {
 				numPanes = MainViewManager.getPaneCount();
+				_resizeOpenFilesContainer(numPanes, workingFilesPaneSize);
 			});
+
 			MainViewManager.on("paneDestroy", function (e, paneId) {
 				numPanes = MainViewManager.getPaneCount();
+				_resizeOpenFilesContainer(numPanes, workingFilesPaneSize);
 			});
+
 			$('#working-set-list-container').on('panelResizeUpdate', function (element, newSize) {
-				sizeForOpenFilesContainer = newSize / numPanes;
-				for (i = 0; i < numPanes; i++) {
-					$openFilesContainer[i].style.setProperty('height', sizeForOpenFilesContainer - 38 + "px");
-				}
+				workingFilesPaneSize = newSize;
+				_resizeOpenFilesContainer(numPanes, workingFilesPaneSize);
 			});
 		}
 	});
 });
+
+
