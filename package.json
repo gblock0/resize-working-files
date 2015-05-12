@@ -3,7 +3,8 @@
 	"title": "Resize Working Files",
 	"description": "Brackets extensions to allow the user to resize the Working Files pane.",
 	"homepage": "https://github.com/gblock0/resize-working-files",
-	"version": "1.5.0",
+	"version": "1.6.0",
 	"author": "Greg Block <gblock0@gmail.com>",
+	"engines": { "brackets": ">=1.0.0" }, 
 	"license": "MIT"
 }
