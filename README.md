@@ -1,4 +1,4 @@
-#Resizable Working Files Pane (WIP)
+#Resizable Working Files Pane
 
 Use by selected *View* -> *Resize Working Files*
 
